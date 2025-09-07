@@ -7,15 +7,15 @@ from datetime import datetime
 import random
 
 
-# actualizacion del reloj en la etiqueta con manejo de excepciones
+#actualizacion del reloj en la etiqueta
 def mostrar_hora(ciudad, zona_horaria, etiqueta):
     tz = pytz.timezone(zona_horaria)
     tiempo_inicio = time.time()
     fallo_simulado = False
     while True:
         try:
-            # --- Simulación de falla tras 10 segundos SOLO para el hilo de México (solo una vez por ejecución) ---
-            # Descomenta el siguiente bloque para activar la simulación de falla:
+            #imulacion de falla tras 10 segundos SOLO para el hilo de Mexico (solo una vez por ejecucion)
+            #descomenta el siguiente bloque para activar la simulacion de falla:
             if ciudad == "México" and not fallo_simulado and (time.time() - tiempo_inicio) > 10:
                 fallo_simulado = True
                 raise Exception("Fallo simulado en el hilo de México después de 10 segundos")
@@ -27,7 +27,7 @@ def mostrar_hora(ciudad, zona_horaria, etiqueta):
             raise
         time.sleep(1)
 
-# función para reiniciar un hilo si falla
+#funcion para reiniciar un hilo si falla
 def supervisor(target, args, nombre):
     def run():
         while True:
@@ -77,7 +77,7 @@ def registrar_llegada():
     print(f"Hora China: {hora_china}")
     entrada_id.delete(0, tk.END)
 
-
+#configuracion de la ventana y sus componentes
 ventana = tk.Tk()
 ventana.title("Registro de Distribuidores")
 ventana.update_idletasks()
@@ -100,7 +100,7 @@ etiqueta_china = tk.Label(frame_relojes, text="China: --:--:--", font=("Arial", 
 etiqueta_china.pack(anchor="e")
 
 
-# Supervisores para los hilos de México y China
+#supervisores para los hilos de Mexico y China
 supervisor(mostrar_hora, ("México", "America/Mexico_City", etiqueta_mex), "México")
 supervisor(mostrar_hora, ("China", "Asia/Shanghai", etiqueta_china), "China")
 
