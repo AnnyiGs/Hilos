@@ -1,4 +1,4 @@
-# Práctica: Uso de Hilos para Actualización de Horas y Tolerancia a Fallos
+# Práctica: Uso de Hilos y Excepciones 
 
 Este proyecto contiene un ejemplo de cómo se utilizan hilos en la aplicación de MovilOil para el registro de los distribuidores. Se implementa una interfaz gráfica en Python que utiliza hilos para actualizar la hora de diferentes países y gestionar registros de llegada de distribuidores, demostrando tolerancia a fallos y separación de responsabilidades.
 
@@ -51,7 +51,7 @@ El uso de hilos permite que la interfaz gráfica se mantenga actualizada en tiem
 La estructura modular y el manejo de excepciones aseguran que los registros y la experiencia del usuario no se vean afectados por errores temporales en los hilos.
 
 
-#OCHOA ORTEGA ANDREA J.
+# OCHOA ORTEGA ANDREA J.
 
 
 
