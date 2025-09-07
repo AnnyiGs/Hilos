@@ -21,6 +21,22 @@ El sistema está diseñado para ser tolerante a fallas. Si el hilo encargado de 
 
 ![Referencia: uso de hilos](pruebas/uso%20de%20hilos.png)
 
+## Explicación del código clave
+
+### Creación de hilos
+
+En este proyecto, los hilos se crean utilizando la librería estándar `threading` de Python. Por ejemplo:
+
+```python
+hilo_mex = threading.Thread(target=mostrar_hora, args=("México", "America/Mexico_City", etiqueta_mex), daemon=True)
+hilo_mex.start()
+```
+
+Esto permite que varias tareas (como actualizar la hora de diferentes países o los registros) se ejecuten en paralelo, haciendo que la interfaz gráfica sea más fluida y responsiva.
+
+**Importancia:** Usar hilos es fundamental cuando se necesita que la aplicación realice varias tareas al mismo tiempo sin que la interfaz se congele o se vuelva lenta.
+
+
 ## Importancia de la hora de China
 
 La hora de China es la más importante en este sistema, ya que la empresa es de nacionalidad china. Por esta razón, en el registro general del sistema siempre se guarda la hora de China, asegurando así la consistencia y confiabilidad de los registros, incluso si el hilo de México presenta fallas.
@@ -31,7 +47,7 @@ Al momento de ser registrada una llegada, por el momento se mandan los datos, lo
 
 ![Referencia: consola](pruebas/consola.png)
 
-## Simulación de fallos y tolerancia
+## Simulación de fallos
 
 En este caso se simula una falla en el hilo de México cada 10 segundos para fines prácticos, lo cual lanza un mensaje en consola informando del error. Al mismo tiempo, se manda llamar la función de supervisor, la cual restablece el hilo y hace que el sistema siga funcionando sin necesidad de que el usuario se dé cuenta en ese momento.
 
@@ -43,6 +59,20 @@ Seguidamente, después de la falla, se ejecuta la función supervisor, lo que re
 - **Hilo reiniciado**: cuando el hilo ha sido reiniciado.
 
 ![Referencia: excepciones en los hilos](pruebas/excepciones%20en%20los%20hilos.png)
+
+### Manejo de excepciones en hilos
+
+Cada hilo está protegido con un bloque `try-except` para capturar cualquier error que ocurra durante su ejecución. Si ocurre una excepción, el error se muestra en consola y el supervisor reinicia el hilo automáticamente:
+
+```python
+try:
+	# Código del hilo
+except Exception as e:
+	print(f"[ERROR] El hilo ha fallado: {e}")
+	raise
+```
+
+**Importancia:** El manejo de excepciones asegura que un fallo en una parte del sistema no detenga toda la aplicación. El supervisor permite que los hilos se recuperen automáticamente, aumentando la robustez y disponibilidad del sistema.
 
 ## Resumen y consideraciones
 
