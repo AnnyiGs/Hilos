@@ -45,10 +45,10 @@ def registrar_llegada():
     print(f"Llegada registrada ✔︎")
     print(f"ID: {id_distribuidor}")
     print(f"Fecha: {fecha}")
-    print(f"Hora México: {hora_mex}")
+    print(f"Hora Mexico: {hora_mex}")
     print(f"Hora China: {hora_china}")
 
-# ------------------ Crear ventana ------------------
+
 ventana = tk.Tk()
 ventana.title("Registro de Distribuidores")
 ventana.update_idletasks()
@@ -60,7 +60,7 @@ x = (pantalla_ancho // 2) - (ancho // 2)
 y = (pantalla_alto // 2) - (alto // 2)
 ventana.geometry(f"{ancho}x{alto}+{x}+{y}")
 
-# ------------------ Relojes arriba a la derecha ------------------
+
 frame_relojes = tk.Frame(ventana)
 frame_relojes.pack(anchor="ne", padx=10, pady=5)
 
@@ -70,31 +70,31 @@ etiqueta_mex.pack(anchor="e")
 etiqueta_china = tk.Label(frame_relojes, text="China: --:--:--", font=("Arial", 10, "bold"))
 etiqueta_china.pack(anchor="e")
 
-# Hilos para relojes
+                                                                                                #hilos de mexico y china 
 hilo_mex = threading.Thread(target=mostrar_hora, args=("México", "America/Mexico_City", etiqueta_mex), daemon=True)
 hilo_mex.start()
 
 hilo_china = threading.Thread(target=mostrar_hora, args=("China", "Asia/Shanghai", etiqueta_china), daemon=True)
 hilo_china.start()
 
-# ------------------ Formulario principal ------------------
+
 frame_form = tk.Frame(ventana)
 frame_form.pack(pady=20)
 
-# ID
+#id
 tk.Label(frame_form, text="ID:").grid(row=0, column=0, padx=5, pady=5, sticky="e")
 entrada_id = tk.Entry(frame_form)
 entrada_id.grid(row=0, column=1, padx=5, pady=5)
 
-# Botón "Registrar llegada"
+#registrar llegada boton
 boton_registrar = tk.Button(frame_form, text="Registrar llegada", command=registrar_llegada)
 boton_registrar.grid(row=1, column=0, columnspan=2, pady=10)
 
-# ------------------ Campos bloqueados (solo lectura) ------------------
+#solo lectura
 frame_registro = tk.LabelFrame(ventana, text="Registro de llegada", padx=10, pady=10)
 frame_registro.pack(pady=10, fill="x")
 
-# Fecha actual
+#fecha
 tk.Label(frame_registro, text="Fecha:").grid(row=0, column=0, padx=5, pady=5, sticky="e")
 fecha_actual = datetime.now().strftime("%Y-%m-%d")
 entrada_fecha = tk.Entry(frame_registro, state="readonly")
@@ -103,17 +103,17 @@ entrada_fecha.config(state="normal")
 entrada_fecha.insert(0, fecha_actual)
 entrada_fecha.config(state="readonly")
 
-# Hora en México
+#mexico
 tk.Label(frame_registro, text="Hora México:").grid(row=1, column=0, padx=5, pady=5, sticky="e")
 entrada_hora_mex = tk.Entry(frame_registro, state="readonly")
 entrada_hora_mex.grid(row=1, column=1, padx=5, pady=5, sticky="w")
 
-# Hora en China
+#china
 tk.Label(frame_registro, text="Hora China:").grid(row=2, column=0, padx=5, pady=5, sticky="e")
 entrada_hora_china = tk.Entry(frame_registro, state="readonly")
 entrada_hora_china.grid(row=2, column=1, padx=5, pady=5, sticky="w")
 
-# Hilo para actualizar las horas en las casillas bloqueadas
+#hilo para actualizar las casillas bloqueadas
 hilo_registro = threading.Thread(target=actualizar_registro, daemon=True)
 hilo_registro.start()
 
