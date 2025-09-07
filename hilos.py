@@ -4,14 +4,42 @@ import threading
 import time
 import pytz
 from datetime import datetime
+import random
 
-#actualizacion del reloj en la etiqueta
+
+# actualizacion del reloj en la etiqueta con manejo de excepciones
 def mostrar_hora(ciudad, zona_horaria, etiqueta):
     tz = pytz.timezone(zona_horaria)
+    tiempo_inicio = time.time()
+    fallo_simulado = False
     while True:
-        hora_actual = datetime.now(tz).strftime("%H:%M:%S")
-        etiqueta.config(text=f"{ciudad}: {hora_actual}")
+        try:
+            # --- Simulación de falla tras 10 segundos SOLO para el hilo de México (solo una vez por ejecución) ---
+            # Descomenta el siguiente bloque para activar la simulación de falla:
+            if ciudad == "México" and not fallo_simulado and (time.time() - tiempo_inicio) > 10:
+                fallo_simulado = True
+                raise Exception("Fallo simulado en el hilo de México después de 10 segundos")
+
+            hora_actual = datetime.now(tz).strftime("%H:%M:%S")
+            etiqueta.config(text=f"{ciudad}: {hora_actual}")
+        except Exception as e:
+            print(f"[ERROR] El hilo de {ciudad} ha fallado: {e}")
+            raise
         time.sleep(1)
+
+# función para reiniciar un hilo si falla
+def supervisor(target, args, nombre):
+    def run():
+        while True:
+            try:
+                target(*args)
+            except Exception as e:
+                print(f"[SUPERVISOR] Reiniciando hilo '{nombre}' por error: {e}")
+                print(f"[SUPERVISOR] Hilo '{nombre}' reiniciado")
+                time.sleep(1)
+    hilo = threading.Thread(target=run, daemon=True)
+    hilo.start()
+    return hilo
 
 #actializacion de los campos bloqueados
 def actualizar_registro():
@@ -47,6 +75,7 @@ def registrar_llegada():
     print(f"Fecha: {fecha}")
     print(f"Hora Mexico: {hora_mex}")
     print(f"Hora China: {hora_china}")
+    entrada_id.delete(0, tk.END)
 
 
 ventana = tk.Tk()
@@ -70,12 +99,10 @@ etiqueta_mex.pack(anchor="e")
 etiqueta_china = tk.Label(frame_relojes, text="China: --:--:--", font=("Arial", 10, "bold"))
 etiqueta_china.pack(anchor="e")
 
-                                                                                                #hilos de mexico y china 
-hilo_mex = threading.Thread(target=mostrar_hora, args=("México", "America/Mexico_City", etiqueta_mex), daemon=True)
-hilo_mex.start()
 
-hilo_china = threading.Thread(target=mostrar_hora, args=("China", "Asia/Shanghai", etiqueta_china), daemon=True)
-hilo_china.start()
+# Supervisores para los hilos de México y China
+supervisor(mostrar_hora, ("México", "America/Mexico_City", etiqueta_mex), "México")
+supervisor(mostrar_hora, ("China", "Asia/Shanghai", etiqueta_china), "China")
 
 
 frame_form = tk.Frame(ventana)
@@ -113,8 +140,9 @@ tk.Label(frame_registro, text="Hora China:").grid(row=2, column=0, padx=5, pady=
 entrada_hora_china = tk.Entry(frame_registro, state="readonly")
 entrada_hora_china.grid(row=2, column=1, padx=5, pady=5, sticky="w")
 
-#hilo para actualizar las casillas bloqueadas
-hilo_registro = threading.Thread(target=actualizar_registro, daemon=True)
-hilo_registro.start()
+
+# Supervisor para el hilo de registro
+supervisor(actualizar_registro, (), "registro")
 
 ventana.mainloop()
+
