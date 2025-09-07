@@ -84,13 +84,13 @@ Las excepciones dentro de los hilos son capturadas y reportadas en consola. Si o
 ---
 
 <div align="center">
-	<b>✨ OCHOA ORTEGA ANDREA J.</b>  
+	<b>✨ OCHOA ORTEGA ANDREA J.</b><br>
 	<br>
-	<sub>  Computación Tolerante a Fallas D06.</sub>  
+	<sub>Computación Tolerante a Fallas D06.</sub><br>
 	<br>
 	<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
 	<img src="https://img.shields.io/badge/Tkinter-FFCA28?style=for-the-badge&logo=python&logoColor=black" alt="Tkinter"/>
-	<br><br>
+	<br>
 	<i>“Lo que esta bien hecho no se va a romper.”</i>
 </div>
 
