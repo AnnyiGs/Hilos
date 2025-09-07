@@ -37,7 +37,7 @@ Esto permite que varias tareas (como actualizar la hora de diferentes países o 
 **Importancia:** Usar hilos es fundamental cuando se necesita que la aplicación realice varias tareas al mismo tiempo sin que la interfaz se congele o se vuelva lenta.
 
 
-## Importancia de la hora de China
+## Importancia de la hora de China 🇨🇳
 
 La hora de China es la más importante en este sistema, ya que la empresa es de nacionalidad china. Por esta razón, en el registro general del sistema siempre se guarda la hora de China, asegurando así la consistencia y confiabilidad de los registros, incluso si el hilo de México presenta fallas.
 
