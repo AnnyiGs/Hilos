@@ -80,19 +80,17 @@ El sistema utiliza la librería `threading` de Python para crear hilos que ejecu
 Las excepciones dentro de los hilos son capturadas y reportadas en consola. Si ocurre un error, el supervisor detecta la excepción y reinicia el hilo automáticamente, asegurando que el sistema siga funcionando sin intervención del usuario. Este enfoque es útil en aplicaciones donde la disponibilidad y la robustez son críticas.
 
 
----
-
 
 ---
 
 <div align="center">
-	<b>OCHOA ORTEGA ANDREA J.</b>  
-	<sub>Desarrolladora de soluciones tolerantes a fallos y apasionada por la tecnología.</sub>  
+	<b>✨ OCHOA ORTEGA ANDREA J.</b>  
+	<sub>  Computación Tolerante a Fallas D06.</sub>  
 	<br>
 	<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
 	<img src="https://img.shields.io/badge/Tkinter-FFCA28?style=for-the-badge&logo=python&logoColor=black" alt="Tkinter"/>
 	<br><br>
-	<i>“La tolerancia a fallos no es solo una característica, es una filosofía de desarrollo.”</i>
+	<i>“Lo que esta bien hecho no se va a romper.”</i>
 </div>
 
 
