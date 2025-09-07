@@ -85,6 +85,7 @@ Las excepciones dentro de los hilos son capturadas y reportadas en consola. Si o
 
 <div align="center">
 	<b>✨ OCHOA ORTEGA ANDREA J.</b>  
+	<br>
 	<sub>  Computación Tolerante a Fallas D06.</sub>  
 	<br>
 	<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
