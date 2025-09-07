@@ -51,7 +51,40 @@ El uso de hilos permite que la interfaz gráfica se mantenga actualizada en tiem
 La estructura modular y el manejo de excepciones aseguran que los registros y la experiencia del usuario no se vean afectados por errores temporales en los hilos.
 
 
+
+---
+
 # OCHOA ORTEGA ANDREA J.
+
+---
+
+## Requisitos previos
+
+- Python 3.8 o superior
+- Librerías: `tkinter` (incluida en la mayoría de instalaciones de Python), `pytz`
+
+Para instalar pytz:
+
+```bash
+pip install pytz
+```
+
+## Reutilización de funciones en otros programas
+
+Las siguientes funciones y estructuras pueden ser fácilmente adaptadas a otros proyectos que requieran concurrencia o actualización periódica de datos:
+
+- **mostrar_hora**: Permite actualizar información en tiempo real usando hilos.
+- **actualizar_registro**: Útil para sincronizar datos de diferentes fuentes o zonas horarias.
+- **supervisor**: Permite reiniciar automáticamente cualquier función que se ejecute en un hilo si ocurre una excepción, aumentando la tolerancia a fallos.
+
+Estas funciones pueden ser copiadas y adaptadas para monitorear sensores, actualizar interfaces, manejar tareas repetitivas, etc.
+
+## ¿Cómo funcionan los hilos y las excepciones en este sistema?
+
+El sistema utiliza la librería `threading` de Python para crear hilos que ejecutan funciones en paralelo. Cada hilo se encarga de una tarea específica (actualizar hora, actualizar registros, etc.), lo que permite que la interfaz gráfica siga siendo responsiva y que los datos se actualicen en tiempo real.
+
+Las excepciones dentro de los hilos son capturadas y reportadas en consola. Si ocurre un error, el supervisor detecta la excepción y reinicia el hilo automáticamente, asegurando que el sistema siga funcionando sin intervención del usuario. Este enfoque es útil en aplicaciones donde la disponibilidad y la robustez son críticas.
+
 
 
 
