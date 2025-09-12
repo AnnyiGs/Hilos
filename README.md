@@ -121,7 +121,7 @@ Las excepciones dentro de los hilos son capturadas y reportadas en consola. Si o
 	<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
 	<img src="https://img.shields.io/badge/Tkinter-FFCA28?style=for-the-badge&logo=python&logoColor=black" alt="Tkinter"/>
 	<br>
-	<i>“Lo que esta bien hecho no se va a romper.”</i>
+	<i>“”</i>
 </div>
 
 
